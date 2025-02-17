@@ -1,0 +1,8 @@
+def count_digits_in_string(s):
+    if s == '':
+        return 0
+    return (1 if s[0].isdigit() else 0) + count_digits_in_string(s[1:])
+
+# Example usage
+string = "abc123"
+print(count_digits_in_string(string))
