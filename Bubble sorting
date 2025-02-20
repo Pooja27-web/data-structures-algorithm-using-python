@@ -1,0 +1,17 @@
+def bubble_sort(list):
+    size=len(list)
+    for i in range(size-1):
+        for j in range(size-1):
+            if list[j]>list[j+1]:
+                temp=list[j]
+                list[j]=list[j+1]
+                list[j+1]=temp
+n=int(input("Enter the number of elements:"))
+lst=[]
+for i in range(n):
+    num=int(input("enter elements"))
+    lst.append(num)
+bubble_sort(lst)
+print("the sorted elements are:")
+for i  in range(n):
+    print(lst[i],end=" ")
