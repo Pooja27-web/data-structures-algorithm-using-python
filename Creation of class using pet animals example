@@ -1,0 +1,11 @@
+class Pet :
+    count=0
+    def __init__(self,n=' '): #object inialization(method 1)
+        self.name=n
+        Pet.count+=1
+    def display(self): #method 2
+        print(Pet.count)
+#instance of object
+p1=Pet("aaa")
+p2=Pet("bbbb")
+p1.display()
