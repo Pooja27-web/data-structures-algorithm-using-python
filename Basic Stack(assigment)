@@ -1,0 +1,7 @@
+stack=[]
+stack.append(56)
+stack.append(48)
+stack.append(49)
+stack.append(111)
+stack.append(10)
+print("The stack after appending all the elements is:",stack)
