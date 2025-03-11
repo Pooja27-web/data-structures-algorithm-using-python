@@ -1,0 +1,32 @@
+class Stack:
+    def __init__(self): # creation of empty list
+        self.items=[] #init is for object or creation
+    def isempty():
+        return self.items==[]
+    def push(self,item):
+        self.items.append(item)
+    def pop (self):
+        return self.items.pop()
+    def peek(self):
+        return self.items[len(self.items)-1]
+    def size(self):
+            return len(self.items)
+    def display(self):tems)-1
+        print()
+if __name__ == "__main__":
+    stack = Stack()
+    stack.push(10)
+    stack.push(20)
+    stack.push(30)
+    stack.push(40)
+    stack.push(50)
+    
+    print("Stack after pushing elements:")
+    stack.display()
+
+    print("Top element:", stack.peek())
+    print("Popped element:", stack.pop())
+
+        top=len(self.items)
+    print("Stack after popping an element:")
+    stack.display()
