@@ -1,0 +1,59 @@
+# Circular Singly Linked list
+
+#  creating Node class
+# Each node has two parts: data and a link to the next node
+class Node:
+    def __init__(self, data):
+        self.data = data  # Store the data
+        self.next = None  # Pointer to the next node (initially empty)
+
+# Define a Circular Singly Linked List class
+# This class helps in creating and managing the linked list
+class CircularSinglyLinkedList:
+    def __init__(self):
+        self.head = None  # Start with an empty list
+
+    #Function to create a circular linked list
+    def create_list(self):
+        if self.head is None:
+            data = int(input("Enter data for the first node: "))  # Take input for first node
+            new_node = Node(data)  # Create a new node
+            self.head = new_node  # Set it as the head node
+            new_node.next = self.head  # Link it to itself (circular property)
+            current = new_node  # Track the last node
+        else:
+            current = self.head  # Start from the head
+
+        # Loop to add multiple nodes
+        while True:
+            option = input("Do you want to add another node? (yes/no): ").strip().lower()
+            if option == 'yes':
+                data = int(input("Enter data: "))  # Take input for next node
+                new_node = Node(data)  # Create a new node
+                current.next = new_node  # Link the current node to the new one
+                new_node.next = self.head  # Link the new node back to the head
+                current = new_node  # Move current pointer to the new node
+            else:
+                current.next = self.head  # Ensure circular connection before stopping
+                break  # Exit loop if user chooses 'no'
+
+    # Step 4: Function to display the circular linked list
+    def display(self):
+        if self.head is None:  # If list is empty
+            print("The list is empty.")
+            return
+
+        current = self.head  # Start from the head
+        while True:
+            print(current.data, end=" -> ")  # Print node data
+            current = current.next  # Move to the next node
+            if current == self.head:  # Stop when back at the head
+                break
+        print("(Back to head)")  # Indicate circular structure
+
+# Step 5: Main function to run the program
+if __name__ == "__main__":
+    csll = CircularSinglyLinkedList()  # Create an instance of the list
+    csll.create_list()  # Call function to create list
+    print("\nCircular Singly Linked List:")
+    csll.display()  # Display the list
