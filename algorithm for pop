@@ -1,0 +1,9 @@
+#algorithm pop()
+step 1:if top=-1 then
+print"Stack underflow"
+go to step 3
+Step2:else:
+ele=list[top]
+top=top-1
+return element
+Step3:end
