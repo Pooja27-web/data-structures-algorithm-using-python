@@ -1,0 +1,9 @@
+#algorithum push()
+#step: if top=size(n)-1,then
+print"Stack overflow"
+go to step3
+#step2:else:
+top=top+1 #adds a element to the top 
+list[top]=new ele
+#step 3:
+end
