@@ -1,0 +1,203 @@
+#all 6 methods inor
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def isempty(self):
+        return len(self.items) == 0
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        if not self.isempty():
+            return self.items.pop()
+        return None
+
+    def peek(self):
+        if not self.isempty():
+            return self.items[-1]
+        return None
+
+class TreeNode:
+    def __init__(self, Newdata=None, lchild=None, rchild=None):
+        self.left = lchild
+        self.data = Newdata
+        self.right = rchild
+
+class BST:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, newData):
+        newNode = TreeNode(newData)
+        if self.root is None:
+            self.root = newNode
+        else:
+            curNode = self.root
+            parentNode = None
+            while curNode is not None:
+                parentNode = curNode
+                if newData < curNode.data:
+                    curNode = curNode.left
+                else:
+                    curNode = curNode.right
+            if newData < parentNode.data:
+                parentNode.left = newNode
+            else:
+                parentNode.right = newNode
+
+    def preorder(self):
+        st = Stack()
+        curNode = self.root
+        while curNode is not None:
+            print(curNode.data, end=" ")
+            if curNode.right:
+                st.push(curNode.right)
+            curNode = curNode.left
+            if curNode is None and not st.isempty():
+                curNode = st.pop()
+
+    def inorder(self):
+        st = Stack()
+        curNode = self.root
+        while curNode is not None or not st.isempty():
+            while curNode is not None:
+                st.push(curNode)
+                curNode = curNode.left
+            curNode = st.pop()
+            print(curNode.data, end=" ")
+            curNode = curNode.right
+
+    def postorder(self):
+        st = Stack()
+        curNode = self.root
+        if curNode is None:
+            return
+        while True:
+            while curNode is not None:
+                if curNode.right:
+                    st.push(curNode.right)
+                st.push(curNode)
+                curNode = curNode.left
+            curNode = st.pop()
+            if curNode.right and st.peek() == curNode.right:
+                st.pop()
+                st.push(curNode)
+                curNode = curNode.right
+            else:
+                print(curNode.data, end=" ")
+                curNode = None
+            if st.isempty():
+                break
+
+    def findNodeWithParent(self, key):
+        parent = None
+        curNode = self.root
+        while curNode is not None:
+            if key == curNode.data:
+                return parent, curNode
+            elif key < curNode.data:
+                parent = curNode
+                curNode = curNode.left
+            else:
+                parent = curNode
+                curNode = curNode.right
+        return parent, None
+
+    def delete(self, key):
+        parent, curNode = self.findNodeWithParent(key)
+        if curNode is None:
+            print("Node not Found!")
+            return
+        if curNode.left is None and curNode.right is None:  # No children
+            if parent:
+                if parent.left == curNode:
+                    parent.left = None
+                else:
+                    parent.right = None
+            else:
+                self.root = None
+        elif curNode.left is None or curNode.right is None:  # One child
+            childNode = curNode.left if curNode.left else curNode.right
+            if parent:
+                if parent.left == curNode:
+                    parent.left = childNode
+                else:
+                    parent.right = childNode
+            else:
+                self.root = childNode
+        else:  # Two children
+            parentLeft = curNode
+            largestLeft = curNode.left
+            while largestLeft.right is not None:
+                parentLeft = largestLeft
+                largestLeft = largestLeft.right
+            curNode.data = largestLeft.data
+            if parentLeft.right == largestLeft:
+                parentLeft.right = largestLeft.left
+            else:
+                parentLeft.left = largestLeft.left
+
+    def search(self, key):
+        curNode = self.root
+        while curNode is not None:
+            if key == curNode.data:
+                return curNode
+            elif key < curNode.data:
+                curNode = curNode.left
+            else:
+                curNode = curNode.right
+        return None
+
+# Driver code
+bst = BST()
+while True:
+    print("Program to implement binary search tree")
+    print("1.Insert Node")
+    print("2.Preorder Traversal")
+    print("3.Inorder Traversal")
+    print("4.Postorder Traversal")
+    print("5.Delete a Node")
+    print("6.Search a Node")
+    print("7.Exit")
+    choice = int(input("Enter your choice:"))
+
+    if choice == 1:
+        num = int(input("Enter the data:"))
+        bst.insert(num)
+
+    elif choice == 2:
+        print("Preorder:", end=" ")
+        bst.preorder()
+        print()
+
+    elif choice == 3:
+        print("Inorder:", end=" ")
+        bst.inorder()
+        print()
+
+    elif choice == 4:
+        print("Postorder:", end=" ")
+        bst.postorder()
+        print()
+
+    elif choice == 5:
+        num = int(input("Enter the data you want to delete:"))
+        bst.delete(num)
+
+    elif choice == 6:
+        num = int(input("Enter the data you want to search:"))
+        findNode = bst.search(num)
+        if findNode is None:
+            print("Node not found!")
+        else:
+            print("Node found!")
+
+    elif choice == 7:
+        print("\nQuitting....")
+        break
+
+    else:
+        print("Invalid choice! Please enter the correct choice!")
+        continue
