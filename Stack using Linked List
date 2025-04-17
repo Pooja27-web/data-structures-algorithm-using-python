@@ -1,0 +1,58 @@
+class StackNode:
+    def _init_(self, NewData, Link):
+        self.data = NewData
+        self.next = Link
+class Stack:
+    def _init_(self):
+        self.top = None
+    def is_empty(self):
+        return self.top is None
+    def push(self, NewData):
+        self.top = StackNode(NewData, self.top)
+    def pop(self):
+        node = self.top
+        self.top = self.top.next
+        return node.data
+    def peek(self):
+        return self.top.data
+    def display(self):
+        current_node = self.top
+        while current_node is not None:
+            print(current_node.data)
+            current_node = current_node.next
+
+stack = Stack()
+while(True):
+    print("Program to implement the stack using Linked List.")
+    print("1. Push")
+    print("2. Pop")
+    print("3. Peek")
+    print("4. Display")
+    print("5. Exit")
+    choice = int(input("Enter the choice : "))
+    if choice == 1:
+        num = int(input("Enter the data : "))
+        stack.push(num)
+    elif choice == 2:
+         if stack.is_empty():
+             print("Stack Underflow!!!")
+         else:
+             num = stack.pop()
+             print("The popped element : ",num)
+    elif choice == 3:
+         if stack.is_empty():
+             print("Stack Underflow!!!")
+         else:
+             num = stack.peek()
+             print("The top element in stack : ",num)
+    elif choice == 4:
+        if stack.is_empty():
+            print("Stack is empty!!!!")
+        else:
+            stack.display()
+    elif choice == 5:
+        print("QUitting..!!!")
+        break
+    else:
+        print("Invalid choice!!! Enter the correct choice (1-5)")
+        continue
