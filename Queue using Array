@@ -1,0 +1,20 @@
+import numpy as np
+class Queue:
+    def __init__(self,size):
+        self.front=-1
+        self.rear=-1
+        self.size=size
+        self.arr=np.empty(size,dtype=int)
+    def isempty(self):
+        return self.front==-1
+    def arr_size(self):
+        return len(self.arr)
+    def isfull(self):
+        return self.rear=self.size-1
+    def peek():
+        return self.arr[self.front]
+    def enqueue(self,item):
+        if self.isfull():
+            print("queue is full")
+            
+        
