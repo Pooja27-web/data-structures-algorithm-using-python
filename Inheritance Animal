@@ -1,0 +1,14 @@
+class Animal:
+    def __init__(self, dog_name): 
+        self.dog_name = dog_name
+
+    def speak(self):
+        return "Speaks"
+
+# Child class
+class Dog(Animal):
+    def speak(self):
+        return "barks"
+d = Dog("Ruby")
+
+print(dog.dog_name,  dog.speak())
