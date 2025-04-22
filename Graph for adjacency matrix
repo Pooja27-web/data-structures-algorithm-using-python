@@ -1,0 +1,80 @@
+class Graph:
+    def __init__(self, size=0):  # Fixed def__init__ to def __init__
+        self.size = size
+        self.items = [[0 for i in range(size)] for j in range(size)]
+
+    def isempty(self):
+        return self.size == 0
+
+    def insert_vertex(self):
+        for i in range(self.size):
+            self.items[i].append(0)  # Fixed self,items to self.items
+        self.items.append([0 for i in range(self.size + 1)])
+        self.size += 1
+
+    def insert_edge(self, vi, vj):  # funtion to insert and edge
+        if vi >= self.size or vj >= self.size:
+            print("invalid vertex index")
+            return
+        self.items[vi][vj] = 1
+        self.items[vj][vi] = 1  # Fixed v1 to vj
+
+    def delete_vertex(self, v):  # function to delete a vertex
+        if v >= self.size:
+            print("vertex not found")
+            return
+        for i in range(self.size):
+            del self.items[i][v]
+        del self.items[v]  # Fixed 'def self.items[v]' to 'del self.items[v]'
+        self.size -= 1
+        print("vertex removed")
+
+    def delete_edge(self, vi, vj):  # funtion to delete an edge
+        if vi >= self.size or vj >= self.size:
+            print("vertex not found")
+            return
+        self.items[vi][vj] = 0
+        self.items[vj][vi] = 0
+        print("edge removed!")  # Fixed spelling
+
+    def display(self):
+        for i in range(self.size):
+            print("v{}|".format(i), end='')
+            for j in range(self.size):  # Fixed self,size to self.size
+                print(self.items[i][j], end='')
+            print("|")
+
+
+g = Graph()
+while True:
+    print("\nProgram to implement graph using adjacency matrix")
+    print("1.Insert a vertex")
+    print("2.Insert  an edge")
+    print("3.Remove a vertex")
+    print("4.Remove an edge")
+    print("5.Display")
+    print("6.Exit")
+    choice = int(input("enter your choice:"))
+    if choice == 1:
+        g.insert_vertex()
+    elif choice == 2:
+        vs = int(input("enter souce vertex:"))
+        ve = int(input("enter end vertex:"))
+        g.insert_edge(vs, ve)
+    elif choice == 3:
+        v = int(input("enter the vertex:"))
+        g.delete_vertex(v)
+    elif choice == 4:
+        vs = int(input("enter source vertex:"))
+        ve = int(input("enter end vertex:"))
+        g.delete_edge(vs, ve)  # Fixed function name from delete_edeg_ to delete_edge
+    elif choice == 5:
+        if g.isempty():
+            print("graph is empty")
+        else:
+            g.display()
+    elif choice == 6:
+        print("quitting")
+        break
+    else:
+        print("invalid number")
